@@ -76,7 +76,7 @@ class Command(BaseCommand):
                     'tipo': tipo_map[tipo],
                     'superficie': 'Pasto sintético',
                     'dimensiones': dim,
-                    'descripcion': f"{nom}: pasto sintético de alta calidad, camarines y estacionamiento. Horario de atención: 18:00 a 00:00, en 6 bloques de 1 hora (18-19, 19-20, 20-21, 21-22, 22-23 y 23-00).",
+                    'descripcion': f"{nom}: pasto sintético de alta calidad, camarines y estacionamiento. Horario de atención: 18:00 a 00:00, en 6 bloques de 1 hora (18:00-19:00, 19:00-20:00, 20:00-21:00, 21:00-22:00, 22:00-23:00 y 23:00-00:00).",
                     'tarifa_bloque': tarifa,
                     'cupos_bloques': cupos,
                     'estado': 'disponible',

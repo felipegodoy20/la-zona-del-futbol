@@ -9,14 +9,20 @@ def _obtener_carrito(request):
     return request.session.setdefault('carrito', {})
 
 
+def _calcular_totales(carrito):
+    # La tarifa ya incluye IVA: se separa el IVA (19%) del total para el desglose
+    total = sum(item['subtotal'] for item in carrito.values())
+    iva = round(total * 19 / 119)
+    neto = total - iva
+    return neto, iva, total
+
+
 def carrito_ver(request):
     carrito = _obtener_carrito(request)
-    subtotal = sum(item['subtotal'] for item in carrito.values())
-    iva = int(subtotal * 0.19)
-    total = subtotal + iva
+    neto, iva, total = _calcular_totales(carrito)
     return render(request, 'pedidos/carrito.html', {
         'items_carrito': carrito.values(),
-        'subtotal': subtotal,
+        'subtotal': neto,
         'iva': iva,
         'total': total,
         'esta_vacio': len(carrito) == 0,
@@ -96,18 +102,16 @@ def checkout_simulado(request):
     if not carrito:
         return redirect('catalogo:lista')
 
-    subtotal = sum(item['subtotal'] for item in carrito.values())
-    iva = int(subtotal * 0.19)
-    total = subtotal + iva
+    neto, iva, total = _calcular_totales(carrito)
     items_reservados = list(carrito.values())
 
-    # La vista de resumen vacía la sesión
+    # Vista de resumen vacía la sesión
     del request.session['carrito']
     request.session.modified = True
 
     return render(request, 'pedidos/checkout_exito.html', {
         'items': items_reservados,
-        'subtotal': subtotal,
+        'subtotal': neto,
         'iva': iva,
         'total': total,
         'orden_id': f"RES-{request.user.id}-2026",

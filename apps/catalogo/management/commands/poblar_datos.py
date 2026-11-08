@@ -58,16 +58,16 @@ class Command(BaseCommand):
 
         # (código, nombre, tipo, dimensiones, tarifa por bloque, bloques por jornada, destacada)
         canchas = [
-            ("F5T-01", "Cancha F5 Techada 1", "Fútbol 5 Techada", "25 x 15 m", 20000, 12, True),
-            ("F5T-02", "Cancha F5 Techada 2", "Fútbol 5 Techada", "25 x 15 m", 20000, 12, False),
-            ("F5A-01", "Cancha F5 Aire Libre 1", "Fútbol 5 al Aire Libre", "25 x 15 m", 15000, 12, True),
-            ("F5A-02", "Cancha F5 Aire Libre 2", "Fútbol 5 al Aire Libre", "25 x 15 m", 15000, 12, False),
-            ("F7T-01", "Cancha F7 Techada 1", "Fútbol 7 Techada", "50 x 30 m", 27000, 10, True),
-            ("F7T-02", "Cancha F7 Techada 2", "Fútbol 7 Techada", "50 x 30 m", 27000, 10, False),
-            ("F7A-01", "Cancha F7 Aire Libre 1", "Fútbol 7 al Aire Libre", "50 x 30 m", 23000, 10, True),
-            ("F7A-02", "Cancha F7 Aire Libre 2", "Fútbol 7 al Aire Libre", "50 x 30 m", 23000, 10, False),
+            ("F5T-01", "Cancha F5 Techada 1", "Fútbol 5 Techada", "25 x 15 m", 20000, 6, True),
+            ("F5T-02", "Cancha F5 Techada 2", "Fútbol 5 Techada", "25 x 15 m", 20000, 6, False),
+            ("F5A-01", "Cancha F5 Aire Libre 1", "Fútbol 5 al Aire Libre", "25 x 15 m", 15000, 6, True),
+            ("F5A-02", "Cancha F5 Aire Libre 2", "Fútbol 5 al Aire Libre", "25 x 15 m", 15000, 6, False),
+            ("F7T-01", "Cancha F7 Techada 1", "Fútbol 7 Techada", "50 x 30 m", 27000, 6, True),
+            ("F7T-02", "Cancha F7 Techada 2", "Fútbol 7 Techada", "50 x 30 m", 27000, 6, False),
+            ("F7A-01", "Cancha F7 Aire Libre 1", "Fútbol 7 al Aire Libre", "50 x 30 m", 23000, 6, True),
+            ("F7A-02", "Cancha F7 Aire Libre 2", "Fútbol 7 al Aire Libre", "50 x 30 m", 23000, 6, False),
         ]
-
+        
         for cod, nom, tipo, dim, tarifa, cupos, dest in canchas:
             Cancha.objects.get_or_create(
                 codigo=cod,
@@ -76,7 +76,7 @@ class Command(BaseCommand):
                     'tipo': tipo_map[tipo],
                     'superficie': 'Pasto sintético',
                     'dimensiones': dim,
-                    'descripcion': f"{nom}: pasto sintético de alta calidad, camarines y estacionamiento.",
+                    'descripcion': f"{nom}: pasto sintético de alta calidad, camarines y estacionamiento. Horario de atención: 18:00 a 00:00, en 6 bloques de 1 hora (18-19, 19-20, 20-21, 21-22, 22-23 y 23-00).",
                     'tarifa_bloque': tarifa,
                     'cupos_bloques': cupos,
                     'estado': 'disponible',
